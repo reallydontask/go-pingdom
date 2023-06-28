@@ -177,3 +177,44 @@ func TestCheckContactUnmarshal(t *testing.T) {
 	assert.NotNil(t, contact.ID)
 	assert.Equal(t, expectedNotificationTargets, contact.NotificationTargets)
 }
+
+var detailedCustomMessageCheckJSON = `
+{
+	"id" : 85975,
+	"name" : "My check 7",
+  "custom_message": "I am the Walrus",
+	"resolution" : 1,
+	"sendnotificationwhendown" : 0,
+	"notifyagainevery" : 0,
+	"notifywhenbackup" : false,
+	"created" : 1240394682,
+	"type" : {
+		"http" : {
+			"url" : "/",
+			"port" : 80,
+			"requestheaders" : {
+				"User-Agent" : "Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)",
+				"Prama" : "no-cache"
+			}
+		}
+	},
+	"hostname" : "s7.mydomain.com",
+	"status" : "up",
+	"severity_level": "HIGH",
+	"lasterrortime" : 1293143467,
+	"lasttesttime" : 1294064823,
+	"tags": [],
+	"responsetime_threshold": 2300
+}
+`
+
+func TestCustomMessageCheckResponseUnmarshal(t *testing.T) {
+	var ck CheckResponse
+	err := json.Unmarshal([]byte(detailedCustomMessageCheckJSON), &ck)
+	assert.NoError(t, err)
+	assert.Equal(t, "http", ck.Type.Name)
+	assert.NotNil(t, ck.Type.HTTP)
+	assert.Equal(t, 2, len(ck.Type.HTTP.RequestHeaders))
+	assert.Equal(t, "HIGH", ck.SeverityLevel)
+	assert.Equal(t, "I am the Walrus", ck.CustomMessage)
+}
