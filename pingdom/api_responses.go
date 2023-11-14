@@ -21,6 +21,7 @@ type PingdomError struct {
 type CheckResponse struct {
 	ID                       int                 `json:"id"`
 	Name                     string              `json:"name"`
+	CustomMessage            string              `json:"custom_message,omitempty"`
 	Resolution               int                 `json:"resolution,omitempty"`
 	SendNotificationWhenDown int                 `json:"sendnotificationwhendown,omitempty"`
 	NotifyAgainEvery         int                 `json:"notifyagainevery,omitempty"`

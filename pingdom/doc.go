@@ -12,7 +12,7 @@ Construct a new Pingdom client:
 
 Using a Pingdom client, you can access supported services.
 
-CheckService
+# CheckService
 
 This service manages pingdom Checks which are represented by the `Check` struct.
 When creating or updating Checks you must specify at a minimum the `Name`, `Hostname`
@@ -56,6 +56,5 @@ Update a check:
 Delete a check:
 
 	msg, err := client.Checks.Delete(12345)
-
 */
 package pingdom
