@@ -1,6 +1,6 @@
-module github.com/DrFaust92/go-pingdom
+module github.com/reallydontask/go-pingdom
 
-go 1.19
+go 1.23
 
 require (
 	github.com/stretchr/testify v1.3.0
